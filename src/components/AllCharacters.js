@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 import { number } from "prop-types";
-import "./allCharacters.css";
+import "./allCharacters.scss";
 
 const allCharactersQuery = gql`
   query($page: Int!) {
