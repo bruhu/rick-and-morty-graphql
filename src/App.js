@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 import SingleCharacter from "./components/SingleCharacter";
+import "./App.scss"
 
 // import AllCharacters from "./components/allCharacters";
 

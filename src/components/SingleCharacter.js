@@ -17,6 +17,7 @@ const SingleCharacterQuery = gql`
       results {
         name
         id
+        image
       }
     }
   }
@@ -26,7 +27,7 @@ const SingleCharacter = () => {
   //useState Hook
   //my character is the state I am going to use
   const [page, setPage] = useState(1);
-  const [character, SetCharacter] = useState("Morty");
+  const [character, SetCharacter] = useState("Rick");
 
   return (
     <div>
@@ -34,6 +35,7 @@ const SingleCharacter = () => {
         type="text"
         value={character}
         onChange={e => SetCharacter(e.target.value)}
+        className="input-group-prepend character-search-input"
       />
       {/* double curlies here so it is an object or else turned into an object */}
       <Query variables={{ page, character }} query={SingleCharacterQuery}>
@@ -59,13 +61,22 @@ const SingleCharacter = () => {
           prev = prev ? prev : 1;
 
           return (
-            <div>
-              {count > 0 && count}
-              {results ? (
-                results.map(({ name, id }) => <p key={id}>{name}</p>)
-              ) : (
-                <p>No results found</p>
-              )}
+            <React.Fragment>
+              {count > 0 && <p className="results-count">{count} results</p>}
+              <div className="character-list-container container">
+                <div className="row">
+                  {results ? (
+                    results.map(({ name, image, status, id }) => (
+                      <div className="col-md-3">
+                        <img src={image} className="character-pic" />
+                        <p key={id}>{name}</p>{" "}
+                      </div>
+                    ))
+                  ) : (
+                    <p>No results found</p>
+                  )}
+                </div>
+              </div>
               <button type="button" onClick={() => setPage(prev)}>
                 Prev
               </button>
@@ -73,7 +84,7 @@ const SingleCharacter = () => {
                 Next
               </button>
               <div>{paginationButton(pages, setPage, page)}</div>
-            </div>
+            </React.Fragment>
           );
         }}
       </Query>

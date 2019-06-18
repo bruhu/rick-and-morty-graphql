@@ -5,3 +5,18 @@
 // .active {
 //   border: 1px solid blue;
 // }
+
+.results-count {
+  font-style: italic;
+}
+
+.character-list-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.character-pic {
+    width: 150px;
+    border-radius: 3px;
+}
