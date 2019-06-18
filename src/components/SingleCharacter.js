@@ -3,10 +3,13 @@ import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 
 const SingleCharacterQuery = gql`
-  query($character: String!) {
-    characters(filter: { name: $character }) {
+  query($page: Int!, $character: String!) {
+    characters(page: $page, filter: { name: $character }) {
       info {
         count
+        next
+        prev
+        pages
       }
       results {
         name
@@ -18,6 +21,7 @@ const SingleCharacterQuery = gql`
 
 const SingleCharacter = () => {
   //my character is the state I am going to use
+  const [page, setPage] = useState(1);
   const [character, SetCharacter] = useState("Morty");
 
   return (
@@ -28,7 +32,7 @@ const SingleCharacter = () => {
         onChange={e => SetCharacter(e.target.value)}
       />
       {/* double curlies here so it is an object or else turned into an object */}
-      <Query variables={{ character }} query={SingleCharacterQuery}>
+      <Query variables={{ page, character }} query={SingleCharacterQuery}>
         {/* callback inside the query variable - we destructure here */}
         {(
           //  bunch of variables:
@@ -52,5 +56,7 @@ const SingleCharacter = () => {
     </div>
   );
 };
+
+// const paginationButton = (pageCount, setPage, currentPage)
 
 export default SingleCharacter;
