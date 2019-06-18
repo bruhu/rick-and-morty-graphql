@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ApolloClient, { gql } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 
